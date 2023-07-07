@@ -7,12 +7,12 @@ export default function App() {
   const [waterCount, setWaterCount] = useState(0);
 
   function handleClick() {
-    setWaterCount(waterCount + 1);
+    setWaterCount(waterCount + 8);
   }
 
   function undoClick() {
-    if (waterCount > 0) {
-      setWaterCount(waterCount - 1);
+    if (waterCount > 8) {
+      setWaterCount(waterCount - 8);
     } else {
       setWaterCount(0);
     }
@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <div>
-      <h2>You've had {waterCount} glasses of water so far.</h2>
+      <h2>You've had {waterCount} ounces of water so far.</h2>
       <input id="userWaterCount" type="number" />
       <UserWaterCount onCustomSubmit={handleUserWaterCountChange} />
       <WaterCounter
@@ -63,7 +63,7 @@ function WaterReducer({ onWaterReducerClick }) {
 function UserWaterCount({ onCustomSubmit }) {
   return (
     <div>
-      <button className="userWaterCount" onClick={onCustomSubmit}></button>
+      <button className="userWaterCount" onClick={onCustomSubmit}>Add Custom Number of Ounces</button>
     </div>
   );
 }
