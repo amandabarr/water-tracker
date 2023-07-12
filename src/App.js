@@ -19,22 +19,26 @@ export default function App() {
   }
 
   function handleUserWaterCountChange() {
+    const inputNumber = document.getElementById("customOunces");
     const userInput = parseInt(
-      document.getElementById("userWaterCount").value,
+      document.getElementById("customOunces").value,
       10
     );
     setWaterCount(waterCount + userInput);
+    inputNumber.value="";
   }
 
   return (
     <div>
       <h2>You've had {waterCount} ounces of water so far.</h2>
-      <input id="userWaterCount" type="number" />
+
       <UserWaterCount onCustomSubmit={handleUserWaterCountChange} />
+      <p>
       <WaterCounter
         waterCount={waterCount}
         onWaterCountClick={() => handleClick()}
       />
+      </p>
       <WaterReducer onWaterReducerClick={() => undoClick()} />
     </div>
   );
@@ -63,7 +67,11 @@ function WaterReducer({ onWaterReducerClick }) {
 function UserWaterCount({ onCustomSubmit }) {
   return (
     <div>
-      <button className="userWaterCount" onClick={onCustomSubmit}>Add Custom Number of Ounces</button>
+      <form id="userWaterCount">
+        <input type="number" id="customOunces" />
+        <input type="button" className="userWaterCount" onClick={onCustomSubmit} value="Submit" />
+      </form>
     </div>
   );
 }
+
