@@ -10,7 +10,7 @@ export default function App() {
   function handleClick() {
     const newWaterCount = waterCount + 8;
     setWaterCount(newWaterCount);
-    setHistory([...history, newWaterCount]);
+    setHistory([...history, 8]);
   }
 
   function undoClick() {
