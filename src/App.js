@@ -7,12 +7,6 @@ export default function App() {
   const [userInput, setUserInput] = useState("");
   const [history, setHistory] = useState([]);
 
-  // function handleClick() {
-  //   const newWaterCount = waterCount + 8;
-  //   setWaterCount(newWaterCount);
-  //   setHistory([...history, 8]);
-  // }
-
   function handleUserWaterCountChange(event) {
     setUserInput(event.target.value);
   }
@@ -48,26 +42,10 @@ export default function App() {
       </h2>
 
       <UserWaterCount userInput={userInput} onCustomSubmit={handleSubmit} onInputChange={handleUserWaterCountChange} />
-      {/* <p>
-      <WaterCounter
-        waterCount={waterCount}
-        onWaterCountClick={() => handleClick()}
-      />
-      </p> */}
       <WaterReducer onWaterReducerClick={() => undoClick()} />
     </div>
   );
 }
-
-// function WaterCounter({ onWaterCountClick }) {
-//   return (
-//     <div>
-//       <button className="waterCount" onClick={onWaterCountClick}>
-//         Add 8oz Water
-//       </button>
-//     </div>
-//   );
-// }
 
 function WaterReducer({ onWaterReducerClick }) {
   return (
