@@ -7,28 +7,10 @@ export default function App() {
   const [userInput, setUserInput] = useState("");
   const [history, setHistory] = useState([]);
 
-  function handleClick() {
-    const newWaterCount = waterCount + 8;
-    setWaterCount(newWaterCount);
-    setHistory([...history, 8]);
-  }
-
-  function undoClick() {
-    if (waterCount > 8) {
-      setWaterCount(waterCount - 8);
-    } else {
-      setWaterCount(0);
-    }
-  }
-
-  // function handleUserWaterCountChange() {
-  //   const inputElement = document.getElementById("customOunces");
-  //   const userInput = parseInt(
-  //     inputElement.value,
-  //     10
-  //   );
-  //   setWaterCount(waterCount + userInput);
-  //   inputElement.value=""; //clears the input field
+  // function handleClick() {
+  //   const newWaterCount = waterCount + 8;
+  //   setWaterCount(newWaterCount);
+  //   setHistory([...history, 8]);
   // }
 
   function handleUserWaterCountChange(event) {
@@ -46,6 +28,14 @@ export default function App() {
     }
   }
 
+  function undoClick() {
+    if (history.length > 0) {
+      const lastInput = history[history.length - 1];
+      setWaterCount(waterCount - lastInput);
+      setHistory(history.slice(0, -1));
+    }
+  }
+
   return (
     <div>
       <h2>You've had {waterCount} ounces of water so far.</h2>
@@ -58,32 +48,32 @@ export default function App() {
       </h2>
 
       <UserWaterCount userInput={userInput} onCustomSubmit={handleSubmit} onInputChange={handleUserWaterCountChange} />
-      <p>
+      {/* <p>
       <WaterCounter
         waterCount={waterCount}
         onWaterCountClick={() => handleClick()}
       />
-      </p>
+      </p> */}
       <WaterReducer onWaterReducerClick={() => undoClick()} />
     </div>
   );
 }
 
-function WaterCounter({ onWaterCountClick }) {
-  return (
-    <div>
-      <button className="waterCount" onClick={onWaterCountClick}>
-        Add 8oz Water
-      </button>
-    </div>
-  );
-}
+// function WaterCounter({ onWaterCountClick }) {
+//   return (
+//     <div>
+//       <button className="waterCount" onClick={onWaterCountClick}>
+//         Add 8oz Water
+//       </button>
+//     </div>
+//   );
+// }
 
 function WaterReducer({ onWaterReducerClick }) {
   return (
     <div>
       <button className="waterReducer" onClick={onWaterReducerClick}>
-        Oops! Remove 8oz Water
+        Oops! Remove Last Entry
       </button>
     </div>
   );
